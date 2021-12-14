@@ -3,7 +3,8 @@ import Reservation from '../models/reservation.model.js'
 export const create= async (req, res)=>{
     const {name, store, status}= req.body
     if(!name || !store || !status){
-        return res.sendStatus(400).json({
+        
+        return res.status(400).json({
             status: 'failure',
             message: 'Invalid input'
         })
@@ -19,7 +20,7 @@ export const create= async (req, res)=>{
             data: resa
         })
     } catch (error) {
-        return res.sendStatus(500).message({
+        return res.status(500).json({
             status: 'failure',
             message: error.message ? error.message : 'Unable to save new reservation',
             data: error
@@ -38,7 +39,7 @@ export const read= async (req, res)=>{
         })
         
     } catch (error) {
-        return res.sendStatus(500).message({
+        return res.status(500).json({
             status: 'failure',
             message: error.message ? error.message : 'Unable to read reservation',
             data: error
@@ -60,7 +61,7 @@ export const update= async (req, res)=>{
         })
 
     } catch (error) {
-        return res.sendStatus(500).message({
+        return res.status(500).json({
             status: 'failure',
             message: error.message ? error.message : 'Unable to update reservation',
             data: error
@@ -83,7 +84,7 @@ export const deleteResa= async (req, res)=>{
         })
 
     } catch (error) {
-        return res.sendStatus(500).message({
+        return res.status(500).json({
             status: 'failure',
             message: error.message ? error.message : `Unable to delete reservation "${name}"`,
             data: error
