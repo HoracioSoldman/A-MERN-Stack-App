@@ -72,14 +72,14 @@ export const update= async (req, res)=>{
 
 export const deleteResa= async (req, res)=>{
 
-    const {_id, name}= req.body
+    const {_id}= req.body
     try {
         
         await Reservation.deleteOne({_id})
         const list= await Reservation.find()
         return res.send({
             status: 'success',
-            message: `Reservation: "${name}" deleted`,
+            message: `Reservation deleted`,
             data: list
         })
 

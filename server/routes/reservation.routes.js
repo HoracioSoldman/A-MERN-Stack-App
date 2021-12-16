@@ -7,8 +7,8 @@ router.get('/', read)
 
 router.post('/create', create)
 
-router.post('/update', update)
+router.put('/update', update)
 
-router.post('/delete', deleteResa)
+router.delete('/delete', deleteResa)
 
 export default router
