@@ -51,9 +51,8 @@ export default function FormResa({reservation}) {
     const validateInput= ()=>{
         const validation= {result: true, field: ''}
         Object.entries(input).forEach((entry)=>{
-            console.log('checking: ', entry[1])
+            
             if(typeof entry[1] === 'string' && !entry[1].trim()){
-                console.log('here: ', entry[1])
                 validation.result= false
                 validation.field= entry[0]
             }
@@ -69,7 +68,7 @@ export default function FormResa({reservation}) {
     const submitForm= ev=>{
         ev.preventDefault()
         const isValid= validateInput()
-        console.log(isValid)
+        
         if(!isValid.result){
             setErrorMessage(`The field "${isValid.field}" is invalid.`)
             return

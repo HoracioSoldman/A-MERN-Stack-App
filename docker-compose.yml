@@ -1,0 +1,39 @@
+version: "3"
+services:
+  server-app:
+    image: node-app
+    build: 
+      context: ./server/
+      dockerfile: Dockerfile
+    environment:
+      - MONGO_URI=mongodb://mongo:27017/bijenkorf
+    ports:
+      - "3005:3005"
+    networks:
+      - assignment-app
+    depends_on: 
+      - mongo
+  mongo:
+    image: mongo
+    ports:
+      - "27017:27017"
+    networks:
+      - assignment-app
+    volumes:
+      - mongo-data:/data/db
+  client-app:
+    image: react-app
+    build: 
+      context: ./client/
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    networks:
+      - assignment-app 
+
+networks:
+  assignment-app:
+    driver: bridge
+volumes:
+  mongo-data:
+    driver: local
