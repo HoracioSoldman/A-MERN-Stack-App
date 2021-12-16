@@ -1,6 +1,6 @@
 import {combineReducers} from 'redux'
-import { dialogReducer } from './dialog-reducer'
+import { pgTitleReducer } from './pagetitle-reducer'
 
 export const appReducer= combineReducers({
-    dialog: dialogReducer
+    pageTitle: pgTitleReducer
 })

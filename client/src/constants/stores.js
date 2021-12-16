@@ -1,0 +1,1 @@
+export const AVAILABE_STORES= ['AMS', 'RTD', 'THG', 'EDH']

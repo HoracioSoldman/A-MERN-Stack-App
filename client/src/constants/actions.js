@@ -1,1 +1,1 @@
-export const SET_STATUS= 'set_status'
+export const SET_PGTITLE= 'set_page_title'

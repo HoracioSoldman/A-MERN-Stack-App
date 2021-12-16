@@ -8,6 +8,10 @@ export const HeaderWrapper = styled.header`
     width: 100%;
     top: 0;
     
+    .container {
+        display: flex;
+        justify-content: space-between;
+    }
 
     h1 {
         font-weight: 400;
@@ -15,10 +19,23 @@ export const HeaderWrapper = styled.header`
         margin-top: 5px;
     }
 
-    p {
-        min-height: 20px;
-        margin: 0;
+    .page-title {
+        color: #fff;
+        text-decoration: none;
     }
+
+    ul.menu {
+        list-style: none;
+        .menu-item{
+            color: #fff;
+            text-decoration: none;
+            border-bottom: 1px solid;
+            :hover {
+                font-weight: bold;
+            }
+        }
+    }
+
     @media (max-width: 425px) {
         h1 {
             font-size: 1.8rem;
