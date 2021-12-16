@@ -1,6 +1,6 @@
 import {combineReducers} from 'redux'
-import { pgTitleReducer } from './pagetitle-reducer'
+import { toEditReducer } from './toedit-reducer'
 
 export const appReducer= combineReducers({
-    pageTitle: pgTitleReducer
+    itemToEdit: toEditReducer
 })

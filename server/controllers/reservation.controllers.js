@@ -12,7 +12,7 @@ export const create= async (req, res)=>{
 
     try {
         
-        const resa= new Reservation({name, store, status})
+        const resa= new Reservation({name, store, status, created_at: new Date()})
         await resa.save()
         return res.send({
             status: 'success',
@@ -31,7 +31,7 @@ export const create= async (req, res)=>{
 
 export const read= async (req, res)=>{
     try {
-        const list= await Reservation.find()
+        const list= await Reservation.find().sort({'created_at': 'desc'})
         return res.send({
             status: 'success',
             message: 'Reservations list',
@@ -76,7 +76,7 @@ export const deleteResa= async (req, res)=>{
     try {
         
         await Reservation.deleteOne({_id})
-        const list= await Reservation.find()
+        const list= await Reservation.find().sort({'created_at': 'desc'})
         return res.send({
             status: 'success',
             message: `Reservation deleted`,

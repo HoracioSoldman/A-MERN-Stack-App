@@ -41,6 +41,7 @@
   max-width: 1000px;
   margin-left: auto;
   margin-right: auto;
+  padding: 0 .5rem;
 }
 
 .btn {
@@ -81,4 +82,8 @@
 .cancel-btn:hover {
   color: #222;
   font-weight: bold;
+}
+
+.error-message {
+  color: #8b0000;
 }

@@ -54,5 +54,11 @@ export const PortalWrapper= styled.div`
         }
     }
 
+    @media(max-width: 768px){
+      .confirm-dialog{
+        max-width: 70%;
+      }
+    }
+
   
 `

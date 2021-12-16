@@ -4,6 +4,9 @@ import Loading from '../../../components/loading/loading'
 import { useAxios } from '../../../hooks/useAxios'
 import ResaItem from '../item/resa-item'
 import { ListWrapper } from './list-resa.style'
+import { useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { updateToEdit } from '../../../redux/actions/toedit-actions'
 
 export function ListResa() {
     const listRequestParams= {
@@ -18,7 +21,7 @@ export function ListResa() {
     const {
         response: listResponse, error: listError, loading:listLoading, 
         setParameters: setListParameters 
-    } = useAxios(null)
+    } = useAxios(listRequestParams)
     
     const {
         response: deleteResponse, error: deleteError, loading:deleteLoading, 
@@ -29,19 +32,14 @@ export function ListResa() {
     const [showDialog, setshowDialog] = useState(false)
     const [dialogData, setdialogData] = useState(emptyDialogData)
     const [errorMessage, seterrorMessage] = useState('')
-
-
-    useEffect(() => {
-        seterrorMessage('')
-        setListParameters(listRequestParams)
-    }, [])
-
+    let navigate= useNavigate()
+    const dispatch = useDispatch()
 
     //After requesting the reservation list
     useEffect(() => {
         
         if(listResponse && !listError && !listLoading){
-            const {data, status, message}= listResponse
+            const {data, status}= listResponse
             if(status === 'success'){
                 setlist([...data])
             }
@@ -55,7 +53,7 @@ export function ListResa() {
     //After deleting a reservation
     useEffect(() => {
         if(deleteResponse && !deleteError && !deleteLoading){
-            const {data, status, message}= deleteResponse
+            const {data, status}= deleteResponse
             if(status === 'success'){
                 setlist([...data])
             }
@@ -92,6 +90,11 @@ export function ListResa() {
         setshowDialog(true)
     }
 
+    const askEdit= item=> {
+        dispatch(updateToEdit(item))
+        navigate('/update')
+    }
+
 
     return (
         <ListWrapper>
@@ -103,7 +106,9 @@ export function ListResa() {
                     errorMessage ? 
                     <p>{errorMessage}</p> :
                     list.length ?
-                    list.map((resa=><ResaItem key={resa._id} reservation={resa} onDelete={askDeleteConfirmation}/>)) :
+                    list.map((resa=>(
+                            <ResaItem key={resa._id} reservation={resa} onDelete={askDeleteConfirmation} onEdit={askEdit}/>
+                        ))) :
                     <p>There are no reservations</p>
                 }
                 

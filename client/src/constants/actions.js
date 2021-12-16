@@ -1,1 +1,1 @@
-export const SET_PGTITLE= 'set_page_title'
+export const SET_TO_EDIT= 'set_item_to_edit'

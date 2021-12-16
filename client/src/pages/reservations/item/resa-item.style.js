@@ -7,6 +7,7 @@ export const ItemWrapper= styled.div`
     align-items: center;
     border-bottom: 1px dashed;
     margin-top: 1em;
+    padding-bottom: .2rem;
     
     h3 {
         

@@ -1,13 +1,23 @@
 
-import React from 'react'
+import React, { useEffect } from 'react'
 import { createPortal } from 'react-dom'
 import { PortalWrapper } from './confirm.style'
-import {useSelector} from 'react-redux'
+
 import {AiFillWarning} from 'react-icons/ai'
 const ConfirmDialog = ({title, text, confirmText, cancelText, ...rest}) => {
-    const show= useSelector(state=> state.dialog.show)
-    
-    // const { onConfirm, onCancel, confirmState } = useConfirm();
+
+    //to close dialog on escape-key pressed
+    const onKeydwn = ev=>{
+        if(ev.keyCode && ev.keyCode === 27) 
+            rest.onCancel()
+    }
+    useEffect(()=>{
+        window.addEventListener('keydown', onKeydwn)
+        return ()=>{
+            window.removeEventListener('keydown', onKeydwn);
+        }
+    }, [])
+
 
     const onDialogConfirm= ev=>{
         rest.onConfirm(rest.item)

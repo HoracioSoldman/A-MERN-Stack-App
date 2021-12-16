@@ -2,29 +2,25 @@ import React, { useEffect, useState } from 'react'
 import { HeaderWrapper } from './header.style'
 import {Link} from 'react-router-dom'
 import {useLocation} from 'react-router'
-import { useSelector } from 'react-redux'
 
 
 export default function Header() {
 
-    const pgTitle = useSelector(state => state.pageTitle)
-    const {title} = pgTitle
-
-    
     const {pathname}= useLocation()
     const [pageTitle, setpageTitle] = useState('')
 
     useEffect(() => {
         switch(pathname){
-            case '/':
-                setpageTitle('Reservations')
-                break;
             case '/create':
                 setpageTitle('Create reservation')
                 break;
             case '/update':
                 setpageTitle('Update Reservation')
                 break;
+            default:
+                setpageTitle('Reservations')
+                break;
+            
         }    
     }, [pathname])
 
