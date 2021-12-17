@@ -26,12 +26,12 @@ describe('Testing the controller', ()=>{
     
     it('creates, update and delete a reservation', async ()=>{
         const resa= {
-            name: 'Resa_0',
+            name: 'Resa_Test_0',
             store: 'AMS',
             status: STATUS_TODO
         }
         const resa1= {
-            name: 'Resa_1',
+            name: 'Resa_Test_1',
             store: 'AMS',
             status: STATUS_IN_PROGRESS
         }
@@ -44,7 +44,7 @@ describe('Testing the controller', ()=>{
         resa1._id= body.data._id
 
         //update
-        const response= await supertest(app).post('/api/v1/reservation/update').send(resa1)
+        const response= await supertest(app).put('/api/v1/reservation/update').send(resa1)
         expect(response.statusCode).toEqual(200)
         expect(response.body.status).toEqual('success')
         expect(response.body.data.name).toBeDefined()
@@ -52,14 +52,14 @@ describe('Testing the controller', ()=>{
         
 
         //delete
-        const resp= await supertest(app).post('/api/v1/reservation/delete').send(resa1)
+        const resp= await supertest(app).delete('/api/v1/reservation/delete').send(resa1)
         expect(resp.statusCode).toEqual(200)
         expect(resp.body.status).toEqual('success')
         expect(resp.body.data).toBeDefined()
 
 
         //delete not-found a reservation
-        const res= await supertest(app).post('/api/v1/reservation/delete').send({_id: 'anything', name: 'anything'})
+        const res= await supertest(app).delete('/api/v1/reservation/delete').send({_id: 'anything', name: 'anything'})
         expect(res.statusCode).toEqual(500)
         
     })

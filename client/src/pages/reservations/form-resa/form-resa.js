@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom'
 import { useAxios } from '../../../hooks/useAxios'
 import Loading from '../../../components/loading/loading'
 
-export default function FormResa({reservation}) {
+export default function FormResa({reservation, onFormSubmit}) {
     let navigate= useNavigate()
     const initialFormValues= reservation ? {...reservation} : {name: '', store: '', status: ''}
     const submitRequestParams= reservation ? {
@@ -86,14 +86,14 @@ export default function FormResa({reservation}) {
                     submitLoading ? 
                     <Loading /> :
 
-                    <form name="resa-form" onSubmit={submitForm}>
+                    <form name="resa-form" onSubmit={onFormSubmit? onFormSubmit : submitForm}  data-testid="the-form">
                         <div className="form-input">
                             <label htmlFor="name">Reservation name</label>
-                            <input type="text" id="name" name="name" className="simple-input" value={input.name} onChange={onInputChange} required/>
+                            <input type="text" data-testid="name-input" id="name" name="name" className="simple-input" value={input.name} onChange={onInputChange} required/>
                         </div>
                         <div className="form-input">
                             <label htmlFor="store">Store</label>
-                            <select id="store" name="store" onChange={onInputChange} defaultValue={input.store} required>
+                            <select data-testid="store-select" id="store" name="store" onChange={onInputChange} defaultValue={input.store} required>
                                 <option></option>
                                 {
                                     stores.map((store, index)=>(
@@ -106,9 +106,9 @@ export default function FormResa({reservation}) {
                         </div>
                         <div className="form-input">
                             <label htmlFor="status">Status</label>
-                            <div  name="status" className="form-status" required>
+                            <div name="status" className="form-status" required>
                                 <label className="label-status">
-                                    <input type="radio" value={STATUS_TODO} name="status" checked={input.status === STATUS_TODO} onChange={onInputChange}/> {STATUS_TODO}
+                                    <input type="radio" data-testid="status-todo" value={STATUS_TODO} name="status" checked={input.status === STATUS_TODO} onChange={onInputChange}/> {STATUS_TODO}
                                 </label>
                                 <label className="label-status">
                                     <input type="radio" value={STATUS_IN_PROGRESS} name="status" checked={input.status === STATUS_IN_PROGRESS} onChange={onInputChange}/> {STATUS_IN_PROGRESS}
